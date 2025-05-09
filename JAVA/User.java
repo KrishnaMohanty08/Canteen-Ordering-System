@@ -57,32 +57,29 @@ class sql {
         }
     }
     
-    public void update(int prod_id) throws SQLException {
-        Scanner sc=new Scanner(System.in);
-        String query = "update from Menu where prod_id=?";
-
+    public void update(int prodId, String itemName, int cost, int quantity) throws SQLException {
+        String query = "UPDATE Menu SET item_name = ?, cost = ?, quantity = ? WHERE prod_id = ?";
         try (Connection con = getConnection();
-                PreparedStatement Pstmt = con.prepareStatement(query)){
-                    // System.out.println("Enter the Index of the row ");
-                    // int id=sc.nextInt();
-                    // System.out.println("Enter the Columnn Name:");
-                    // String colName=sc.next();
-                    Pstmt.setInt(1,prod_id);
-                    int rowsAffected=Pstmt.executeUpdate();
-                    System.out.println(rowsAffected +"deleted");
-                            
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw e;
+             PreparedStatement pstmt = con.prepareStatement(query)) {
+            pstmt.setString(1, itemName);
+            pstmt.setInt(2, cost);
+            pstmt.setInt(3, quantity);
+            pstmt.setInt(4, prodId);
+            int rowsAffected = pstmt.executeUpdate();
+            System.out.println(rowsAffected + " row(s) updated.");
         }
+    }
 }
 
 public class User {
     public static void main(String[] args) {
+
         Scanner in=new Scanner(System.in);
         sql data = new sql();
+
         System.out.println("Enter the number for the operation :\n 1:read all data \n 2:delete one");
         int n=in.nextInt();
+        
         switch(n){
             case 1:{
                 try{
@@ -93,6 +90,13 @@ public class User {
             }case 2:{
                 try{
                     data.delete(1);
+                }catch(SQLException e){
+                    e.printStackTrace();
+                }
+            }
+            case 3:{
+                try{
+                    data.update(2,"B",34,7);
                 }catch(SQLException e){
                     e.printStackTrace();
                 }
