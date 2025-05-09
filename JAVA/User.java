@@ -2,6 +2,7 @@ import java.sql.*;
 import java.util.Scanner;
 
 class sql {
+
     private static final String url = "jdbc:mysql://localhost:3306/canteen_system";
     private static final String root = "root";
     private static final String password = "MohantY#08";
@@ -69,8 +70,33 @@ class sql {
             System.out.println(rowsAffected + " row(s) updated.");
         }
     }
-}
 
+    public String export() throws SQLException{
+
+        String query ="Select * from menu";
+        StringBuilder json=new StringBuilder("[");
+        try(
+            Connection con=getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs= stmt.executeQuery(query);){
+
+            boolean first =true;
+            while(rs.next()){
+                if(!first){
+                    json.append(',');
+                }
+                first=false;
+                json.append('{')
+                .append("\"prod_id\":").append(rs.getInt("prod_id")).append(',')
+                .append("\"item_name\":").append(rs.getString("item_name")).append(',')
+                .append("\"cost\":").append(rs.getString("cost")).append(',')
+                .append("\"quantity\":").append(rs.getString("quantity")).append('}');
+            }
+            json.append("]");
+            return json.toString();
+        }
+    }
+}
 public class User {
     public static void main(String[] args) {
 
