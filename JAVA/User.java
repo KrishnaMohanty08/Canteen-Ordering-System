@@ -58,8 +58,26 @@ class sql {
 
         Scanner sc = new Scanner(System.in);
 
-        String query = "UPDATE Menu SET  quantity = ? ,cost=? WHERE prod_id = ?";
-        String query2 = "UPDATE Menu SET  quantity = ?  WHERE prod_id = ?";
+        String query = "Insert into menu (prod_id,item_name,cost,quantity) values(?,?,?,?)";
+
+        try (Connection con = getConnection()) {
+
+            PreparedStatement pstmt = con.prepareStatement(query);
+            pstmt.setInt(1, quantity);
+            pstmt.setInt(2, cost);
+            pstmt.setInt(3, prodId);
+            int rowsAffected = pstmt.executeUpdate();
+            System.out.println(rowsAffected + " row(s) updated.");
+
+        }
+    }
+
+    public void update(int prodId, String itemName, int cost, int quantity) throws SQLException {
+
+        Scanner sc = new Scanner(System.in);
+
+        String query = "UPDATE menu SET cost = ?, quantity = ? WHERE prod_id = ?";
+        String query2 = "UPDATE menu SET quantity = ? WHERE prod_id = ?";
 
         System.out.println("Do you want to modify cost?");
         String choice = sc.next();
@@ -70,6 +88,7 @@ class sql {
                 pstmt.setInt(1, quantity);
                 pstmt.setInt(2, cost);
                 pstmt.setInt(3, prodId);
+                pstmt.setString(4, itemName);
                 int rowsAffected = pstmt.executeUpdate();
                 System.out.println(rowsAffected + " row(s) updated.");
 
@@ -102,14 +121,15 @@ class sql {
                 first = false;
                 json.append("{\n")
                         .append("\"prod_id\":").append(rs.getInt("prod_id")).append(",\n")
-                        .append("\"item_name\":").append("\"").append(rs.getString("item_name")).append("\"").append(",\n")
+                        .append("\"item_name\":").append("\"").append(rs.getString("item_name")).append("\"")
+                        .append(",\n")
                         .append("\"cost\":").append(rs.getInt("cost")).append(",\n")
                         .append("\"quantity\":").append(rs.getInt("quantity"))
                         .append("}\n");
 
             }
             json.append(']');
-            String data=json.toString();
+            String data = json.toString();
             try {
                 FileWriter sqlWrite = new FileWriter("sql.json");
                 sqlWrite.write(data);
@@ -130,8 +150,7 @@ public class User {
         Scanner in = new Scanner(System.in);
         sql data = new sql();
 
-        System.out.println(
-                "Enter the number for the operation :\n 1:read all data \n 2:delete one \n 3:add one \n 4:export json");
+        System.out.println("Enter the number for the operation :\n 1:read all data \n 2:delete one \n 3:add one \n 4:export json \n 5:update an item");
         int n = in.nextInt();
 
         switch (n) {
@@ -183,6 +202,24 @@ public class User {
                 }
                 break;
             }
+            case 5: {
+                try {
+                    System.out.println("Enter the prod_id to update:");
+                    int id = in.nextInt();
+                    System.out.println("Enter the itemName (not used in update but required):");
+                    String name = in.next(); // unused currently
+                    System.out.println("Enter the new cost:");
+                    int cost = in.nextInt();
+                    System.out.println("Enter the new quantity:");
+                    int quant = in.nextInt();
+
+                    data.update(id, name, cost, quant);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                break;
+            }
+
             default:
                 System.out.println("Invalid option.");
         }

@@ -4,7 +4,7 @@ import javax.swing.*;
 public class Admin implements ActionListener
 {
     JFrame jf;
-    JButton b1,b2,b3;
+    JButton b1,b2,b3,b4;
     JLabel l1,l2;
     static public String name="";
     public Admin()
@@ -37,25 +37,33 @@ public class Admin implements ActionListener
         b3.setBounds(70, 190, 250, 30);
         b3.addActionListener(this);
         jf.add(b3);
+
+        b4=new JButton("Remove the stock in existing items");
+        b4.setBounds(70, 190, 250, 30);
+        b4.addActionListener(this);
+        jf.add(b4);
     }
     public void actionPerformed(ActionEvent e) 
     {
         sql s1=new sql();
-        if(e.getSource()==b1)
-        {
-           try
-           {
+        if(e.getSource()==b1){
+           try{
             s1.readAll();
            }
-           catch(Exception ex)
-           {
+           catch(Exception ex){
             System.out.println(ex);
            }
         }
-        if(e.getSource()==b2)
-        {
+        if(e.getSource()==b2){
             New_Item n1=new New_Item();
             n1.main(null);
+        }
+        if(e.getSource()==b3){
+            try{
+                s1.update(0, name, 0, 0);
+            }catch(Exception ex){
+                System.out.println(ex);
+            }
         }
         
     }
