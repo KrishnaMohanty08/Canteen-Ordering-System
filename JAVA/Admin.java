@@ -58,12 +58,10 @@ public class Admin implements ActionListener
             New_Item n1=new New_Item();
             n1.main(null);
         }
-        if(e.getSource()==b3){
-            try{
-                s1.update(0, name, 0, 0);
-            }catch(Exception ex){
-                System.out.println(ex);
-            }
+        if(e.getSource()==b3)
+        {
+            stck_up st1=new stck_up();
+            st1.main(null);
         }
         
     }
