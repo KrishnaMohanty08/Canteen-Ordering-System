@@ -15,7 +15,7 @@ public class login implements ActionListener
         jf = new JFrame("LOGIN PAGE");
 
         jl1 = new JLabel("WELCOME, PLEASE ENTER YOUR CREDENTIALS");
-        jl1.setBounds(50, 30, 400, 30); // Top, wide label
+        jl1.setBounds(50, 30, 400, 30);
         jf.add(jl1);
 
         jl2 = new JLabel("USERNAME");
