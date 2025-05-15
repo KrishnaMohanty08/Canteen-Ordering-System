@@ -2,7 +2,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.*;
 
-public class GUI implements ActionListener 
+public class stck_up implements ActionListener 
 {
     JFrame jf;
     JLabel tf1,tf2;
@@ -12,7 +12,7 @@ public class GUI implements ActionListener
     ArrayList<JComboBox<String>> items;
     ArrayList<JTextField> quanFields;
 
-    public GUI() 
+    public stck_up() 
     {
         jf = new JFrame("MENU");
         tf1 = new JLabel("Welcome to the Canteen");
@@ -107,6 +107,6 @@ public class GUI implements ActionListener
 
     public static void main(String[] args) 
     {
-        new GUI();
+        new stck_up();
     }
 }
