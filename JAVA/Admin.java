@@ -54,8 +54,10 @@ public class Admin implements ActionListener
         }
         if(e.getSource()==b2)
         {
-
+            New_Item n1=new New_Item();
+            n1.main(null);
         }
+        
     }
     public static void main(String[] args) 
     {
