@@ -108,6 +108,9 @@ public class New_Item implements ActionListener
                 {
                     s1.add(pid, name, cost, quan);
                     JOptionPane.showMessageDialog(jf, "Item added successfully!");
+                    stck_up st1=new stck_up();
+                    st1.stck1.add(name);
+                    st1.jc1.setModel(new DefaultComboBoxModel<>(st1.stck1.toArray(new String[0])));
                     tf1.setText("");
                     tf2.setText("");
                     tf3.setText("");
