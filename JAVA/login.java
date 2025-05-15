@@ -63,7 +63,8 @@ public class login implements ActionListener
         }
         else
         {
-            // Success action here
+            Admin.name=adm;
+            Admin.main(null);
         }
     }
 
