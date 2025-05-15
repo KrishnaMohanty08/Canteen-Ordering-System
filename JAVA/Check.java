@@ -6,7 +6,16 @@ public class Check
 
     public String check(String us,String pass)
     {
-        
+        for(int i=0;i<Admin.length;i++)
+        {
+            if( Admin[i].equals(us))
+            {
+                if(password[i].equals(pass))
+                {
+                    return username[i];
+                }
+            }
+        }
         return "false";
     }
 }
