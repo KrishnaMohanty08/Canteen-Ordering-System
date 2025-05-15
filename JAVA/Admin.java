@@ -40,10 +40,9 @@ public class Admin implements ActionListener
     }
     public void actionPerformed(ActionEvent e) 
     {
-        
+        sql s1=new sql();
         if(e.getSource()==b1)
         {
-           sql s1=new sql();
            try
            {
             s1.readAll();
@@ -55,7 +54,7 @@ public class Admin implements ActionListener
         }
         if(e.getSource()==b2)
         {
-            
+
         }
     }
     public static void main(String[] args) 
