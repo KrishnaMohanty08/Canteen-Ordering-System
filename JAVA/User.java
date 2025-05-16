@@ -55,22 +55,19 @@ class sql {
     }
 
     public void add(int prodId, String itemName, int cost, int quantity) throws SQLException {
+    String query = "INSERT INTO menu (prod_id, item_name, cost, quantity) VALUES (?, ?, ?, ?)";
 
-        Scanner sc = new Scanner(System.in);
-
-        String query = "Insert into menu (prod_id,item_name,cost,quantity) values(?,?,?,?)";
-
-        try (Connection con = getConnection()) {
-
-            PreparedStatement pstmt = con.prepareStatement(query);
-            pstmt.setInt(1, quantity);
-            pstmt.setInt(2, cost);
-            pstmt.setInt(3, prodId);
-            int rowsAffected = pstmt.executeUpdate();
-            System.out.println(rowsAffected + " row(s) updated.");
-
-        }
+    try (Connection con = getConnection();
+         PreparedStatement pstmt = con.prepareStatement(query)) {
+        pstmt.setInt(1, prodId);         
+        pstmt.setString(2, itemName);    
+        pstmt.setInt(3, cost);           
+        pstmt.setInt(4, quantity);       
+        int rowsAffected = pstmt.executeUpdate();
+        System.out.println(rowsAffected + " row(s) updated.");
     }
+}
+
 
     public void update(int prodId, String itemName, int cost, int quantity) throws SQLException {
 
@@ -88,7 +85,6 @@ class sql {
                 pstmt.setInt(1, quantity);
                 pstmt.setInt(2, cost);
                 pstmt.setInt(3, prodId);
-                pstmt.setString(4, itemName);
                 int rowsAffected = pstmt.executeUpdate();
                 System.out.println(rowsAffected + " row(s) updated.");
 

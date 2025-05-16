@@ -48,7 +48,7 @@ const Main = () => {
 
   return (
     <>
-      <div className="m-3 flex flex-col gap-2">
+      <div className="m-3 flex flex-row gap-2">
         {items.map((prod) => {
           return (
             <div key={prod.prod_id} className="card card-body border border-t-xl border-black my-2 w-80">

@@ -46,6 +46,7 @@ public class Admin implements ActionListener
     public void actionPerformed(ActionEvent e) 
     {
         sql s1=new sql();
+
         if(e.getSource()==b1){
            try{
             s1.readAll();
