@@ -1,5 +1,5 @@
 import React from 'react';
-import 'K:/GitHub/Canteen-Ordering-System/CustomerPage/src/App.css'
+import '../App.css'
 
 const Navbar = () => {
   return (
